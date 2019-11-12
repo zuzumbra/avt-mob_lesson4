@@ -39,7 +39,7 @@ public class ArticlePageObject extends MainPageObject {
         this.swipeUpToFindElement(By.xpath(FOOTER_ELEMENT), "Cannot find the end of the article", 20);
     }
 
-    public void addArticleToMyList(String name_of_folder)
+    public void addArticleToMyListToNewFolder(String name_of_folder)
     {
         this.waitForElementAndClick(
                 By.xpath(OPTIONS_BUTTON),
@@ -79,12 +79,38 @@ public class ArticlePageObject extends MainPageObject {
         );
     }
 
+    public void addArticleToMyListToSavedFolder(String name_of_folder)
+    {
+        this.waitForElementAndClick(
+                By.xpath(OPTIONS_BUTTON),
+                "Cannot find button to open article options",
+                5
+        );
+
+        this.waitForElementAndClick(
+                By.xpath(OPTIONS_ADD_TO_MY_LIST_BUTTON),
+                "Cannot find option to add article to reading list",
+                5
+        );
+
+       MyListsPageObject myListsPageObject = new MyListsPageObject(driver);
+       myListsPageObject.openFolderByName(name_of_folder);
+    }
+
+
+
     public void closeArticle()
     {
         this.waitForElementAndClick(
                 By.xpath(CLOSE_ARTICLE_BUTTON),
                 "Cannot close article, cannot find X link",
                 5
+        );
+    }
+
+    public void assertTitleIsFound()
+    {
+        this.assertElementPresent(By.id(TITLE),"We found any results by request"
         );
     }
 

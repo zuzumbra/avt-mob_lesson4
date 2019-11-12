@@ -40,7 +40,7 @@ public class SearchPageObject extends MainPageObject {
 
     public void clickCancelSearch()
     {
-        this.waitForElementAndClick(By.id(SEARCH_CANCEL_BUTTON), "Cannot find and click search cancel button",5);
+        this.waitForElementAndClick(By.id(SEARCH_CANCEL_BUTTON), "Cannot find and click search cancel button",10);
     }
 
     public void initSearchInput()
@@ -80,18 +80,12 @@ public class SearchPageObject extends MainPageObject {
 
     public void waitForEmptyResultsLabel()
     {
-        this.waitForElementPresent(
-                By.xpath(SEARCH_EMPTY_RESULT_ELEMENT),
-                "Cannot find empty results label",
-                5
-        );
+        this.waitForElementPresent(By.xpath(SEARCH_EMPTY_RESULT_ELEMENT),"Cannot find empty results label",5);
     }
 
     public void assertThereIsNoResultOfSearch()
     {
-        this.assertElementNotPresent(
-                By.xpath(SEARCH_RESULT_ELEMENT),
-                "We supposed to not find any results"
+        this.assertElementNotPresent(By.xpath(SEARCH_RESULT_ELEMENT),"We supposed to not find any results"
         );
     }
 

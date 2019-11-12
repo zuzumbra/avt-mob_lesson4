@@ -71,12 +71,6 @@ public class MainPageObject {
         return element;
     }
 
-    public boolean checkForMultipleResults(By by)
-    {
-        List<WebElement> elements = driver.findElements(by);
-        return (elements.size() > 1);
-    }
-
     public int getAmountOfElements(By by)
     {
         List elements = driver.findElements(by);
@@ -129,7 +123,7 @@ public class MainPageObject {
         TouchAction action = new TouchAction(driver);
         action
                 .press(right_x, middle_y)
-                .waitAction(2000)
+                .waitAction(600)
                 .moveTo(left_x,middle_y)
                 .release()
                 .perform();
@@ -139,6 +133,14 @@ public class MainPageObject {
         int amount_of_elements = getAmountOfElements(by);
         if (amount_of_elements > 0){
             String default_message = "An element" + by.toString() + "supposed to be not present";
+            throw new AssertionError(default_message + " " + error_message);
+        }
+    }
+
+    public void assertElementPresent (By by, String error_message){
+        List elements = driver.findElements(by);
+        if (elements.size() < 1){
+            String default_message = "An element '" + by.toString() + "' supposed to be present" + "\n";
             throw new AssertionError(default_message + " " + error_message);
         }
     }

@@ -8,7 +8,6 @@ import org.junit.Test;
 public class ArticleTests extends CoreTestCase
 {
     @Test
-
     public void testCompareArticleTitle(){
         SearchPageObject searchPageObject = new SearchPageObject(driver);
         searchPageObject.initSearchInput();
@@ -37,6 +36,17 @@ public class ArticleTests extends CoreTestCase
         ArticlePageObject articlePageObject = new ArticlePageObject(driver);
         articlePageObject.waitForTitleElement();
         articlePageObject.swipeToFooter();
+    }
+
+    @Test
+    public void testWaitForTitleWithoutWaiting(){
+        SearchPageObject searchPageObject = new SearchPageObject(driver);
+        searchPageObject.initSearchInput();
+        searchPageObject.typeSearchLine("Rendering");
+        searchPageObject.clickByArticleWithSubstring("Rendering (computer graphics)");
+
+        ArticlePageObject articlePageObject = new ArticlePageObject(driver);
+        articlePageObject.assertTitleIsFound();
     }
 
 
