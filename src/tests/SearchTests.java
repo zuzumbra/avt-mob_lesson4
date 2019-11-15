@@ -44,4 +44,15 @@ public class SearchTests extends CoreTestCase {
         searchPageObject.clickCancelSearch();
         searchPageObject.assertThereIsNoResultOfSearch();
     }
+
+    @Test
+    public void testSearchElementByTitleAndDescription(){
+        SearchPageObject searchPageObject = new SearchPageObject(driver);
+
+        searchPageObject.initSearchInput();
+        searchPageObject.typeSearchLine("Berlin");
+        searchPageObject.assertElementPresent();
+        searchPageObject.waitForTitleAndDescription();
+
+    }
 }
