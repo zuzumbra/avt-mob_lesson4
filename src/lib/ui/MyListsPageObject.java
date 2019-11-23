@@ -1,11 +1,12 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.By;
+import lib.Platform;
 
-public class MyListsPageObject extends MainPageObject {
 
-    public static final String
+abstract public class MyListsPageObject extends MainPageObject {
+
+    protected static String
             FOLDER_BY_NAME_TPL = "xpath://*[@text='{FOLDER_NAME}']",
             ARTICLE_BY_TITLE_TPL = "xpath://*[@text='{TITLE}']";
 
@@ -56,6 +57,12 @@ public class MyListsPageObject extends MainPageObject {
         this.waitForArticleToAppearByTitle(article_title);
         String article_xpath = getSaveArticleXpathByTitle(article_title);
         this.swipeElementToLeft(article_xpath,"Cannot find saved article");
+
+        if(Platform.getInstance().isIOS())
+        {
+            clickElementToTheRightUpperCorner(article_xpath, "Cannot find saved article");
+        }
+
         this.waitForArticleToDisappearByTitle(article_title);
 
     }

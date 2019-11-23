@@ -1,24 +1,25 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import lib.Platform;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
-public class SearchPageObject extends MainPageObject {
+abstract public class SearchPageObject extends MainPageObject {
 
-    private static final String
-            SEARCH_INIT_ELEMENT = "xpath://*[contains(@text, 'Search Wikipedia')]",
-            SEARCH_INPUT = "xpath://*[contains(@text, 'Search…')]",
-            SEARCH_CANCEL_BUTTON = "id:org.wikipedia:id/search_close_btn",
-            SEARCH_RESULT_BY_SUBSTRING_TPL = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='{SUBSTRING}']",
-            SEARCH_RESULT_ELEMENT = "xpath://*[@resource-id='org.wikipedia:id/search_results_list']/*[@resource-id='org.wikipedia:id/page_list_item_container']",
-            SEARCH_EMPTY_RESULT_ELEMENT = "xpath://*[@text='No results found']",
-            SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION_TPL = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='{TITLE}']/../*[@resource-id='org.wikipedia:id/page_list_item_description'][@text='{DESCRIPTION}']",
-            SEARCH_TITLE = "//*[@resource-id='org.wikipedia:id/page_list_item_title']",
-            SEARCH_DESCRIPTION = "//*[@resource-id='org.wikipedia:id/page_list_item_description']";
+    protected static String
+            SEARCH_INIT_ELEMENT,
+            SEARCH_INPUT,
+            SEARCH_CANCEL_BUTTON,
+            SEARCH_RESULT_BY_SUBSTRING_TPL,
+            SEARCH_RESULT_ELEMENT,
+            SEARCH_EMPTY_RESULT_ELEMENT,
+            SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION_TPL,
+            SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION,
+            SEARCH_TITLE,
+            SEARCH_DESCRIPTION;
 
 
     public SearchPageObject(AppiumDriver driver)
@@ -69,6 +70,10 @@ public class SearchPageObject extends MainPageObject {
         this.waitForElementAndSendKeys(SEARCH_INPUT, search_line,"Cannot find and type into search input", 5);
     }
 
+    public void waitForSearchResultsAppear()
+    {
+        this.waitForElementPresent(SEARCH_RESULT_ELEMENT, "Cannot find any results", 10);
+    }
 
     public void waitForSearchResult(String substring)
     {
@@ -90,11 +95,7 @@ public class SearchPageObject extends MainPageObject {
 
     public int getAmountOfFoundArticles()
     {
-        this.waitForElementPresent(
-                SEARCH_RESULT_ELEMENT,
-                "Cannot find anything by the request",
-                5
-        );
+        this.waitForElementPresent(SEARCH_RESULT_ELEMENT,"Cannot find anything by the request",5);
 
         return  this.getAmountOfElements(SEARCH_RESULT_ELEMENT);
     }
@@ -106,30 +107,41 @@ public class SearchPageObject extends MainPageObject {
 
     public void assertThereIsNoResultOfSearch()
     {
-        this.assertElementNotPresent(SEARCH_RESULT_ELEMENT,"We supposed to not find any results"
-        );
+        this.assertElementNotPresent(SEARCH_RESULT_ELEMENT,"We supposed to not find any results");
     }
 
     public void assertElementPresent()
     {
-        this.assertElementNotPresent(SEARCH_RESULT_ELEMENT,"We found any results by request"
-        );
+        this.assertElementPresent(SEARCH_RESULT_ELEMENT,"We found any results by request");
     }
+
+
 
     public void waitForTitleAndDescription()
     {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        if(Platform.getInstance().isAndroid())
+            {
+            List<WebElement> elements1 = driver.findElements(By.xpath(SEARCH_TITLE));
+            List<WebElement> elements2 = driver.findElements(By.xpath(SEARCH_DESCRIPTION));
+            for (int i = 0; i < 3; i++) {
+                String title = elements1.get(i).getText();
+                String description = elements2.get(i).getText();
+                waitForElementByTitleAndDescription(title, description);
+            }
+        } else {
 
-        List<WebElement> elements1 = driver.findElements(By.xpath(SEARCH_TITLE));
-        List<WebElement> elements2 = driver.findElements(By.xpath(SEARCH_DESCRIPTION));
-        for (int i = 0; i < 3; i++) {
-            String title = elements1.get(i).getText();
-            String description = elements2.get(i).getText();
-            waitForElementByTitleAndDescription(title, description);
+            List<WebElement> elements = driver.findElements(By.xpath(SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION));
+            for (int i = 0; i < 3; i++) {
+                String title_and_description = elements.get(i).getText();
+                String[] exploded_title_and_description = title_and_description.split(Pattern.quote("\n"), 2);
+                String title = exploded_title_and_description[0];
+                String description = exploded_title_and_description[1];
+                waitForElementByTitleAndDescription(title, description);
+
+            }
         }
     }
 }
+
+
+

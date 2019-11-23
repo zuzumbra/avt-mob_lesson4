@@ -1,7 +1,6 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.By;
 
 public class WelcomePageObject extends MainPageObject {
 
@@ -10,8 +9,9 @@ public class WelcomePageObject extends MainPageObject {
             STEP_NEXT_BUTTON = "id:Next",
             STEP_NEW_WAYS_TO_EXPLORE = "id:New ways to explore",
             STEP_ADD_OR_EDIT_PREFFERED_LANGUAGES ="id:Add or edit preferred languages",
-            STEP_LERAN_MORE_ABOUT_DATA_COLLECTED = "id:Learn more about data collected",
-            STEP_GET_STARTED = "id:Get started";
+            STEP_LEARN_MORE_ABOUT_DATA_COLLECTED = "id:Learn more about data collected",
+            STEP_GET_STARTED = "id:Get started",
+            SKIP = "id:Skip";
 
     public WelcomePageObject(AppiumDriver driver)
     {
@@ -41,12 +41,17 @@ public class WelcomePageObject extends MainPageObject {
 
     public void waitForLearnMoreAboutDataCollected()
     {
-        this.waitForElementPresent(STEP_LERAN_MORE_ABOUT_DATA_COLLECTED, "Cannot find 'Learn more about data collected' link", 10);
+        this.waitForElementPresent(STEP_LEARN_MORE_ABOUT_DATA_COLLECTED, "Cannot find 'Learn more about data collected' link", 10);
     }
 
-    public void clickGetSrartedButton()
+    public void clickGetStartedButton()
     {
         this.waitForElementAndClick(STEP_GET_STARTED, "Cannot find and click 'Get started' link", 10);
+    }
+
+    public void clickSkip()
+    {
+        this.waitForElementAndClick(SKIP, "Cannot find and click skip button", 10);
     }
 
 }
