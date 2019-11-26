@@ -12,7 +12,7 @@ public class AndroidSearchPageObject extends SearchPageObject
                 SEARCH_RESULT_BY_SUBSTRING_TPL = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='{SUBSTRING}']";
                 SEARCH_RESULT_ELEMENT = "xpath://*[@resource-id='org.wikipedia:id/search_results_list']/*[@resource-id='org.wikipedia:id/page_list_item_container']";
                 SEARCH_EMPTY_RESULT_ELEMENT = "xpath://*[@text='No results found']";
-                SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION_TPL = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='{TITLE}']/../*[@resource-id='org.wikipedia:id/page_list_item_description'][@text='{DESCRIPTION}']";
+                SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION_TPL = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_container']org.wikipedia:id/page_list_item_title/../*[@resource-id='org.wikipedia:id/page_list_item_description'][@text='{DESCRIPTION}']";
                 SEARCH_TITLE = "//*[@resource-id='org.wikipedia:id/page_list_item_title']";
                 SEARCH_DESCRIPTION = "//*[@resource-id='org.wikipedia:id/page_list_item_description']";
     }

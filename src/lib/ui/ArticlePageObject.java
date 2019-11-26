@@ -18,8 +18,9 @@ abstract public class ArticlePageObject extends MainPageObject {
             MY_LIST_OK_BUTTON,
             CLOSE_ARTICLE_BUTTON,
             POPUP_CLOSE_BUTTON;
-            //CONTENT_TABLE_BUTTON,
-            //CONTENT_TABLE_ELEMENT_BY_SUBSTRING_TPL;
+/*            CONTENT_TABLE_BUTTON,
+            CONTENT_TABLE_ELEMENT_BY_SUBSTRING_TPL,
+            CONTENT_TABLE;*/
 
 
     public ArticlePageObject(AppiumDriver driver)
@@ -27,7 +28,7 @@ abstract public class ArticlePageObject extends MainPageObject {
         super(driver);
     }
 
-    /*private static String getResultContentTableElement(String substring)
+   /* private static String getResultContentTableElement(String substring)
     {
         return CONTENT_TABLE_ELEMENT_BY_SUBSTRING_TPL.replace("{SUBSTRING}", substring);
     }
@@ -42,13 +43,14 @@ abstract public class ArticlePageObject extends MainPageObject {
     {
         String SearchResultXpath = getResultContentTableElement(substring);
         this.waitForElementAndClick(SearchResultXpath, "Cannot find and click content table element " + substring, 10);
-    }
+}
 
     public String getContentTableElement(String substring)
     {
         WebElement title_element = waitForContentTableElement(substring);
         if (Platform.getInstance().isAndroid())
         {
+            this.waitForElementPresent(CONTENT_TABLE, "Cannot find parent element of search element " + substring);
             return title_element.getAttribute("text");
         }
         else
@@ -74,18 +76,17 @@ abstract public class ArticlePageObject extends MainPageObject {
         }
     }
 
-/*
-    public void clickContentTable()
+
+/*    public void clickContentTable()
     {
+        this.waitForElementPresent(ACTIONS_TAB,"Cannot find actions  tab element", 5);
         this.waitForElementAndClick(CONTENT_TABLE_BUTTON, "Cannot find and click content table button", 5);
     }
 
     public WebElement getSearchContentTableElement(String content_table_element)
     {
         return this.waitForElementPresent(content_table_element, "Cannot find element " + content_table_element +  " in table of content", 15);
-    }
-*/
-
+    }*/
 
     public void swipeToFooter()
     {
@@ -95,6 +96,7 @@ abstract public class ArticlePageObject extends MainPageObject {
             this.swipeUpTillElementAppear(FOOTER_ELEMENT, "Cannot find the end of the article", 100);
         }
     }
+
 
     public void addArticleToMyListToNewFolder(String name_of_folder)
     {
@@ -106,7 +108,7 @@ abstract public class ArticlePageObject extends MainPageObject {
 
         this.waitForElementPresent(
                 OPTIONS_CHANGE_LANGUAGE,
-                "Cannot find option to add article to reading list",
+                "Cannot find button Change language",
                 5
         );
 
@@ -169,6 +171,7 @@ abstract public class ArticlePageObject extends MainPageObject {
 
     public void addArticlesToMySaved()
     {
+        this.waitForElementAndClick(OPTIONS_ADD_TO_MY_LIST_BUTTON, "Cannot find option to add article to reading list", 5);
         this.waitForElementAndClick(OPTIONS_ADD_TO_MY_LIST_BUTTON, "Cannot find option to add article to reading list", 5);
     }
 

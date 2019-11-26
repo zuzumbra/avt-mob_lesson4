@@ -50,23 +50,23 @@ public class MyListsTests extends CoreTestCase {
         myListsPageObject.swipeByArticleToDelete(article_title);
     }
 
+
     @Test
     public void testSaveTwoArticlesToMyListAndDeleteOneOfThem(){
 
         String search_line = "Large Hadron Collider";
-        String article_title_1 = "Large Hadron Collider";
-        String article_title_2 = "LHCb experiment";
+        String article_title_1 = "LHCb experiment";
+        String article_title_2 = "Large Hadron Collider";
         String name_of_folder = "Particle accelerators";
 
         SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
 
         searchPageObject.initSearchInput();
         searchPageObject.typeSearchLine(search_line);
+        String expected_title = searchPageObject.getArticleWithSubstring(article_title_1);
         searchPageObject.clickByArticleWithSubstring(article_title_1);
 
         ArticlePageObject articlePageObject = ArticlePageObjectFactory.get(driver);
-
-        articlePageObject.waitForTitleElement();
 
         if(Platform.getInstance().isAndroid()){
             articlePageObject.addArticleToMyListToNewFolder(name_of_folder);
@@ -74,21 +74,20 @@ public class MyListsTests extends CoreTestCase {
             articlePageObject.addArticlesToMySaved();
             articlePageObject.closePopUp();
         }
-
         articlePageObject.closeArticle();
 
         searchPageObject.initSearchInput();
         searchPageObject.typeSearchLine(search_line);
-        searchPageObject.clickByArticleWithSubstring(article_title_2);
-        articlePageObject.waitForTitleElement();
+        searchPageObject.waitForSearchResultsAppear();
 
-        if(Platform.getInstance().isAndroid()){
+        searchPageObject.clickByArticleWithSubstring(article_title_2);
+
+       if(Platform.getInstance().isAndroid()){
             articlePageObject.addArticleToMyListToSavedFolder(name_of_folder);
         } else {
             articlePageObject.addArticlesToMySaved();
             articlePageObject.closePopUp();
         }
-
         articlePageObject.closeArticle();
 
         NavigationUI navigationUI = NavigationUIFactory.get(driver);
@@ -100,15 +99,10 @@ public class MyListsTests extends CoreTestCase {
             myListsPageObject.openFolderByName(name_of_folder);
         }
         myListsPageObject.swipeByArticleToDelete(article_title_2);
-        myListsPageObject.waitForArticleAndClick(article_title_1);
-        String actual_title = articlePageObject.getArticleTitle();
-
+        String actual_title = searchPageObject.getArticleWithSubstring(article_title_1);
         assertEquals(
-                "We see unexpected title",
-                article_title_1,
+                "We see unexpected article",
+                expected_title,
                 actual_title
         );
-
     }
-
-}

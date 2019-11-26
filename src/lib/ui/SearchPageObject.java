@@ -81,6 +81,20 @@ abstract public class SearchPageObject extends MainPageObject {
         this.waitForElementPresent(SearchResultXpath, "Cannot find search result with substring " + substring);
     }
 
+    public String getArticleWithSubstring(String substring)
+    {
+        String SearchResultXpath = getResultSearchElement(substring);
+        WebElement title_element = waitForElementPresent(SearchResultXpath,"Cannot find search result with substring " + substring, 10);
+        if (Platform.getInstance().isAndroid())
+        {
+            return title_element.getAttribute("text");
+        }
+        else
+        {
+            return title_element.getAttribute("name");
+        }
+    }
+
     public void clickByArticleWithSubstring(String substring)
     {
         String SearchResultXpath = getResultSearchElement(substring);
@@ -114,8 +128,6 @@ abstract public class SearchPageObject extends MainPageObject {
     {
         this.assertElementPresent(SEARCH_RESULT_ELEMENT,"We found any results by request");
     }
-
-
 
     public void waitForTitleAndDescription()
     {
