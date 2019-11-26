@@ -16,7 +16,7 @@ public class MyListsTests extends CoreTestCase {
     private static final String name_of_folder = "Learning programming";
 
     @Test
-    public void testSaveFirstArticleToMyList() {
+    public void testSaveFirstArticleToMyList(){
 
         SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
 
@@ -29,7 +29,7 @@ public class MyListsTests extends CoreTestCase {
 
         String article_title = articlePageObject.getArticleTitle();
 
-        if (Platform.getInstance().isAndroid()) {
+        if(Platform.getInstance().isAndroid()){
             articlePageObject.addArticleToMyListToNewFolder(name_of_folder);
         } else {
             articlePageObject.addArticlesToMySaved();
@@ -43,12 +43,67 @@ public class MyListsTests extends CoreTestCase {
 
         MyListsPageObject myListsPageObject = MyListsPageObjectFactory.get(driver);
 
-        if (Platform.getInstance().isAndroid()) {
+        if(Platform.getInstance().isAndroid()){
             myListsPageObject.openFolderByName(name_of_folder);
         }
 
         myListsPageObject.swipeByArticleToDelete(article_title);
     }
+
+
+    @Test
+public void testSaveTwoArticlesToMyListAndDeleteOneOfThem() {
+
+    String search_line = "Large Hadron Collider";
+    String article_title_1 = "LHCb experiment";
+    String article_title_2 = "Large Hadron Collider";
+    String name_of_folder = "Particle accelerators";
+
+    SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
+
+    searchPageObject.initSearchInput();
+    searchPageObject.typeSearchLine(search_line);
+    String expected_title = searchPageObject.getArticleWithSubstring(article_title_1);
+    searchPageObject.clickByArticleWithSubstring(article_title_1);
+
+    ArticlePageObject articlePageObject = ArticlePageObjectFactory.get(driver);
+
+    if (Platform.getInstance().isAndroid()) {
+        articlePageObject.addArticleToMyListToNewFolder(name_of_folder);
+    } else {
+        articlePageObject.addArticlesToMySaved();
+        articlePageObject.closePopUp();
+    }
+    articlePageObject.closeArticle();
+
+    searchPageObject.initSearchInput();
+    searchPageObject.typeSearchLine(search_line);
+    searchPageObject.waitForSearchResultsAppear();
+
+    searchPageObject.clickByArticleWithSubstring(article_title_2);
+
+    if (Platform.getInstance().isAndroid()) {
+        articlePageObject.addArticleToMyListToSavedFolder(name_of_folder);
+    } else {
+        articlePageObject.addArticlesToMySaved();
+        articlePageObject.closePopUp();
+    }
+    articlePageObject.closeArticle();
+
+    NavigationUI navigationUI = NavigationUIFactory.get(driver);
+    navigationUI.clickMyList();
+
+    MyListsPageObject myListsPageObject = MyListsPageObjectFactory.get(driver);
+
+    if (Platform.getInstance().isAndroid()) {
+        myListsPageObject.openFolderByName(name_of_folder);
+    }
+    myListsPageObject.swipeByArticleToDelete(article_title_2);
+    String actual_title = searchPageObject.getArticleWithSubstring(article_title_1);
+    assertEquals(
+            "We see unexpected article",
+            expected_title,
+            actual_title
+    );
 }
-
-
+}
