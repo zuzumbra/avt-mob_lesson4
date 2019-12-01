@@ -104,7 +104,7 @@ public class MyListsTests extends CoreTestCase {
         assertEquals(
                 "We see unexpected article",
                 expected_subtitle,
-                searchPageObject.getArticleWithSubstring(article_title_1)
+                articlePageObject.getArticleSubtitle()
         );
     }
 }
