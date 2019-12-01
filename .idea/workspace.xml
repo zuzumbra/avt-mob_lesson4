@@ -2,6 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc571a10-1e54-4700-ad1e-19410f290a8e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/avt-mob_lecture4/META-INF/avt-mob_lecture4.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/avt-mob_lecture4/lib/CoreTestCase.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/avt-mob_lecture4/lib/ui/ArticlePageObject.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/avt-mob_lecture4/lib/ui/MainPageObject.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/avt-mob_lecture4/lib/ui/MyListsPageObject.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/avt-mob_lecture4/lib/ui/NavigationUI.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/avt-mob_lecture4/lib/ui/SearchPageObject.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/avt-mob_lecture4/tests/ArticleTests.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/avt-mob_lecture4/tests/ChangeAppConditionTests.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/avt-mob_lecture4/tests/MyListsTests.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/avt-mob_lecture4/tests/SearchTests.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/avt-mob_lesson4/META-INF/avt-mob_lesson4.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/avt-mob_lesson4/lib/ui/ArticlePageObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/avt-mob_lesson4/lib/ui/ArticlePageObject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/avt-mob_lesson4/lib/ui/MainPageObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/avt-mob_lesson4/lib/ui/MainPageObject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/avt-mob_lesson4/lib/ui/SearchPageObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/avt-mob_lesson4/lib/ui/SearchPageObject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/avt-mob_lesson4/lib/ui/ios/IOSArticlePageObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/avt-mob_lesson4/lib/ui/ios/IOSArticlePageObject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/avt-mob_lesson4/tests/MyListsTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/avt-mob_lesson4/tests/MyListsTests.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/ui/ArticlePageObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/ArticlePageObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/ui/MainPageObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/MainPageObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/ui/SearchPageObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/SearchPageObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/ui/ios/IOSArticlePageObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/ios/IOSArticlePageObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tests/MyListsTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/MyListsTests.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,7 +69,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.MyListsTests.testSaveTwoArticlesToMyListAndDeleteOneOfThem1">
+  <component name="RunManager" selected="JUnit.MyListsTests.testSaveTwoArticlesToMyListAndDeleteOneOfThem">
     <configuration name="MyListsTests.testSaveTwoArticlesToMyListAndDeleteOneOfThem" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="avt-mob_lesson4" />
       <extension name="coverage">
@@ -140,8 +162,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.MyListsTests.testSaveTwoArticlesToMyListAndDeleteOneOfThem1" />
         <item itemvalue="JUnit.MyListsTests.testSaveTwoArticlesToMyListAndDeleteOneOfThem" />
+        <item itemvalue="JUnit.MyListsTests.testSaveTwoArticlesToMyListAndDeleteOneOfThem1" />
       </list>
     </recent_temporary>
   </component>
@@ -170,17 +192,6 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/lib/ui/ArticlePageObject.java</url>
-          <line>173</line>
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="masterDetails">
     <states>

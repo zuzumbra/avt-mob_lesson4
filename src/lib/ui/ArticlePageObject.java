@@ -9,6 +9,7 @@ abstract public class ArticlePageObject extends MainPageObject {
 
     protected static String
             TITLE,
+            SUBTITLE,
             FOOTER_ELEMENT,
             OPTIONS_BUTTON,
             OPTIONS_ADD_TO_MY_LIST_BUTTON,
@@ -64,6 +65,11 @@ abstract public class ArticlePageObject extends MainPageObject {
         return this.waitForElementPresent(TITLE, "Cannot find article title on page", 15);
     }
 
+    public WebElement waitForSubtitleElement()
+    {
+        return this.waitForElementPresent(SUBTITLE, "Cannot find article subtitle on page", 15);
+    }
+
     public String getArticleTitle() {
         WebElement title_element = waitForTitleElement();
         if (Platform.getInstance().isAndroid())
@@ -73,6 +79,18 @@ abstract public class ArticlePageObject extends MainPageObject {
         else
         {
             return title_element.getAttribute("name");
+        }
+    }
+
+    public String getArticleSubtitle() {
+        WebElement subtitle_element = waitForSubtitleElement();
+        if (Platform.getInstance().isAndroid())
+        {
+            return subtitle_element.getAttribute("text");
+        }
+        else
+        {
+            return subtitle_element.getAttribute("name");
         }
     }
 
@@ -171,7 +189,6 @@ abstract public class ArticlePageObject extends MainPageObject {
 
     public void addArticlesToMySaved()
     {
-        this.waitForElementAndClick(OPTIONS_ADD_TO_MY_LIST_BUTTON, "Cannot find option to add article to reading list", 5);
         this.waitForElementAndClick(OPTIONS_ADD_TO_MY_LIST_BUTTON, "Cannot find option to add article to reading list", 5);
     }
 

@@ -65,6 +65,7 @@ public class MainPageObject {
     public WebElement waitForElementAndSendKeys(String locator, String value, String error_message, long timeoutInSeconds)
     {
         MobileElement element = (MobileElement)waitForElementPresent(locator, error_message, timeoutInSeconds);
+        element.click();
         element.setValue(value);
         return element;
     }
